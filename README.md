@@ -1,96 +1,217 @@
 # QA Automation Assignment
-This repository contains the solution for the QA Engineer assignment.  
-It includes API Automation, Pytest Test Suite, Postman Automation, and UI Automation using Playwright with Pytest.
+
+## Project Overview
+
+This project demonstrates an automation framework for **API and UI testing** using Python.
+It includes automated validation of REST APIs, UI testing using Playwright, logging, and HTML reporting.
+
+The framework is designed using **best practices such as Page Object Model (POM), pytest fixtures, configuration management, and modular structure.**
+
+---
+
+# Tech Stack
+
+* Python
+* pytest
+* Playwright
+* requests
+* pytest-html
+* logging
+
+---
 
 # Project Structure
+
+```
 QA_Assignment
 │
+├── api
+│   ├── api_client.py
+│   └── test_posts_api.py
+│
 ├── api_automation
-│   ├── test_api_posts.py
+│   └── fetch_posts.py
+│
+├── data
 │   └── first_five_posts.json
 │
-├── ui_tests
-│   └── test_ui_playwright.py
+├── postman_collection
+│   └── QA_Assignment.postman_collection.json
 │
-├── requirements.txt
+├── ui
+│   ├── pages
+│   │   └── practice_page.py
+│   └── tests
+│       ├── conftest.py
+│       └── test_ui_playwright.py
+│
+├── utils
+│   ├── config.py
+│   └── logger.py
+│
+├── logs
+│   └── test.log
+│
+├── reports
+│   └── report.html
+│
+├── pytest.ini
 └── README.md
+```
 
+---
 
-# Tech Stack Used
-- Python
-- Requests
-- Pytest
-- JSONSchema
-- Postman
-- Playwright
+# Features Implemented
 
-# Task 1: API Automation using Requests
-Script performs the following actions using the public API:
-https://jsonplaceholder.typicode.com/posts
-### Validations performed
-- Fetch all posts using GET request
-- Validate response status code = **200**
-- Verify each post contains required keys:
-  - userId
-  - id
-  - title
-  - body
-- Save the **first 5 posts into a local JSON file**
+### API Automation
 
-Output file generated:
-first_five_posts.json
+* GET request validation using **requests**
+* Response schema validation
+* Status code verification
+* Data extraction and storage
+* API tests implemented using **pytest**
 
-# Task 2: Pytest API Test Suite
-Pytest test suite covers the following validations:
-### Response Time Validation
-Ensures API response time is **less than 2 seconds**.
-### Schema Validation
-Each response is validated against the schema using **jsonschema**.
-Required fields:
-- userId
-- id
-- title
-- body
-### Parameterized Endpoint Testing
-The following endpoints are tested:
-- /posts
-- /comments
-- /users
-All endpoints must return **status code 200**.
+### UI Automation
 
+* Implemented using **Playwright**
+* Page Object Model (POM)
+* Automated tests for:
 
-# Task 3: Postman Automation
-Postman collection includes the following API tests:
-### GET /posts
-- Validate response status = **200**
-### POST /posts
-- Create a new post
-- Validate response contains the same:
-  - title
-  - body
-### DELETE /posts/{id}
-- Validate response status **200 or 204**
-Postman tests are written using **JavaScript test scripts**.
+  * Page title validation
+  * Radio buttons
+  * Checkboxes
+  * Dropdown selection
+  * New tab navigation
 
-# Task 4: UI Automation using Playwright + Pytest
-UI automation is performed on:
-https://rahulshettyacademy.com/AutomationPractice/
-### Automated Test Scenarios
-- Radio Button selection
-- Checkbox validation
-- Dropdown selection
-- Switch Tab functionality
-Playwright is used with **pytest-playwright** for test execution.
+### Logging
 
-# Task 5: QA Based Questions
-Two scenario-based questions were provided to evaluate QA leadership, problem-solving, and process improvement approach.
-1.Sprint velocity is dropping due to flaky automation tests while leading a QA team of 4 engineers.
-2.Two critical bugs were reported by the client during production release which were missed in QA.
+* Centralized logging using Python **logging module**
+* Logs stored in `logs/test.log`
 
-Detailed answers explaining the **approach to identify root causes, stabilize automation tests, and improve QA processes** are documented in:
-***QA_qnA.md***
+### Test Reporting
+
+* HTML reports generated using **pytest-html**
+* Reports stored in `reports/report.html`
+
+---
 
 # Setup Instructions
-1 Install dependencies
-bash
+
+## 1. Clone the Repository
+
+```
+git clone https://github.com/<your-username>/QA_Assignment.git
+cd QA_Assignment
+```
+
+---
+
+## 2. Create Virtual Environment
+
+```
+python -m venv .venv
+source .venv/bin/activate
+```
+
+For Windows:
+
+```
+.venv\Scripts\activate
+```
+
+---
+
+## 3. Install Dependencies
+
+```
 pip install -r requirements.txt
+```
+
+Install Playwright browsers:
+
+```
+playwright install
+```
+
+---
+
+# Running Tests
+
+Run all tests:
+
+```
+pytest
+```
+
+Run only API tests:
+
+```
+pytest api
+```
+
+Run only UI tests:
+
+```
+pytest ui
+```
+
+---
+
+# Generate HTML Report
+
+```
+pytest --html=reports/report.html --self-contained-html
+```
+
+Open report:
+
+```
+reports/report.html
+```
+
+---
+
+# API Script
+
+The script `fetch_posts.py` fetches posts from the API and saves the **first five posts** into a JSON file.
+
+Run:
+
+```
+python api_automation/fetch_posts.py
+```
+
+Output file:
+
+```
+data/first_five_posts.json
+```
+
+---
+
+# API Endpoint Used
+
+https://jsonplaceholder.typicode.com/posts
+
+---
+
+# UI Test Website
+
+https://rahulshettyacademy.com/AutomationPractice/
+
+---
+
+# Postman Collection
+
+A Postman collection is included in:
+
+```
+postman_collection/QA_Assignment.postman_collection.json
+```
+
+---
+
+# Author
+
+Neha Chorge
+QA Automation Engineer
